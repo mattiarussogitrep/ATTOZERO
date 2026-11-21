@@ -24,29 +24,78 @@ input:focus,select:focus,textarea:focus{outline:2px solid #D1A24C;outline-offset
 a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3px}
 .az-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 [hidden]{display:none !important}
+
+/* ---- header fisso ---- */
+html{scroll-padding-top:84px}
+body{overflow-x:clip}
+.az-header{position:sticky;top:0;z-index:50;background:rgba(14,13,11,0.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(238,231,218,0.08)}
+.az-header-in{max-width:1280px;margin:0 auto;padding:14px clamp(20px,5vw,64px);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.az-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#EEE7DA}
+.az-brand .az-logo{width:40px;height:auto;display:block}
+.az-brand span{font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;font-weight:600;letter-spacing:0.22em}
+.az-menu{display:flex;align-items:center;gap:28px;font-size:14px;letter-spacing:0.04em}
+.az-menu a{color:#CFC7B8;text-decoration:none;padding:10px 0}
+.az-menu a:hover{color:#D1A24C}
+.az-menu a.az-menu-cta{color:#EEE7DA;padding:11px 20px;border:1px solid rgba(209,162,76,0.5);border-radius:2px;transition:background-color .2s}
+.az-menu a.az-menu-cta:hover{background:rgba(209,162,76,0.12);color:#EEE7DA}
+.az-burger{display:none}
+
+/* ---- tablet / smartphone ---- */
+@media (max-width: 900px){
+  .az-header-in{padding:10px 20px}
+  .az-brand .az-logo{width:34px}
+  .az-brand span{font-size:18px;letter-spacing:0.2em}
+  .az-burger{display:inline-flex;flex-direction:column;justify-content:center;gap:6px;width:46px;height:46px;padding:0 12px;background:transparent;border:1px solid rgba(238,231,218,0.18);border-radius:2px;cursor:pointer}
+  .az-burger span{display:block;height:1.5px;background:#EEE7DA;transition:transform .25s ease,opacity .2s ease}
+  .az-header.open .az-burger span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+  .az-header.open .az-burger span:nth-child(2){opacity:0}
+  .az-header.open .az-burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+  .az-menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:8px 20px 28px;background:#0E0D0B;border-bottom:1px solid rgba(209,162,76,0.25);max-height:calc(100vh - 70px);overflow-y:auto}
+  .az-header.open .az-menu{display:flex}
+  .az-menu a{padding:16px 0;font-size:18px;border-bottom:1px solid rgba(238,231,218,0.08)}
+  .az-menu a.az-menu-cta{margin-top:20px;padding:16px 20px;text-align:center;background:#D1A24C;color:#0E0D0B;border:0;font-weight:600;font-size:16px}
+  .az-menu a.az-menu-cta:hover{background:#D1A24C;color:#0E0D0B}
+}
+@media (max-width: 640px){
+  html{scroll-padding-top:72px}
+  .az-hero{gap:32px !important}
+  .az-hero-visual{order:-1;padding:0 !important}
+  .az-hero-logo{max-width:220px !important}
+  .az-hero a.az-btn,.az-hero a.az-ghost{width:100%;justify-content:center}
+  .az-compare thead{display:none}
+  .az-compare,.az-compare tbody,.az-compare tr,.az-compare td{display:block;width:100%}
+  .az-compare tr{padding:18px 0;border-bottom:1px solid rgba(238,231,218,0.1)}
+  .az-compare td{padding:0 !important;border:0 !important}
+  .az-compare td::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:4px}
+  .az-compare td:first-child{margin-bottom:12px;font-size:15px}
+  .az-compare td:first-child::before{color:#7F786D}
+  .az-compare td:last-child::before{color:#D1A24C}
+  article{padding:28px 22px !important}
+}
 </style>
 </head>
 <body>
 <div style="width: 100%; min-height: 100vh; background: #0E0D0B; color: #EEE7DA; font-family: 'Inter Tight', system-ui, sans-serif; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased">
 
-<header style="border-bottom: 1px solid rgba(238,231,218,0.08)">
-<div style="max-width: 1280px; margin: 0 auto; padding: 20px clamp(20px, 5vw, 64px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
-<a href="#top" style="display: flex; align-items: center; gap: 14px; text-decoration: none; color: #EEE7DA">
-<img src="assets/logo-mark.webp" alt="" style="width: 44px; height: auto; display: block">
-<span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 600; letter-spacing: 0.22em">ATTO ZERO</span>
+<header class="az-header" id="az-header">
+<div class="az-header-in">
+<a href="#top" class="az-brand">
+<img src="assets/logo-mark.webp" onerror="this.onerror=null;this.src=\'logo-mark.webp\'" alt="" class="az-logo" width="40" height="33">
+<span>ATTO ZERO</span>
 </a>
-<nav aria-label="Principale" class="az-nav" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 14px; letter-spacing: 0.04em">
-<a href="#approccio" style="color: #CFC7B8; text-decoration: none; padding: 10px 0">Approccio</a>
-<a href="#servizi" style="color: #CFC7B8; text-decoration: none; padding: 10px 0">Servizi</a>
-<a href="#metodo" style="color: #CFC7B8; text-decoration: none; padding: 10px 0">Metodo</a>
-<a href="#per-chi" style="color: #CFC7B8; text-decoration: none; padding: 10px 0">Per chi</a>
-<a href="#contatti" class="az-ghost" style="color: #EEE7DA; text-decoration: none; padding: 11px 20px; border: 1px solid rgba(209,162,76,0.5); border-radius: 2px">Raccontaci il tuo progetto</a>
+<button type="button" class="az-burger" id="az-burger" aria-expanded="false" aria-controls="az-menu" aria-label="Apri il menu"><span></span><span></span><span></span></button>
+<nav id="az-menu" class="az-menu" aria-label="Principale">
+<a href="#approccio">Approccio</a>
+<a href="#servizi">Servizi</a>
+<a href="#metodo">Metodo</a>
+<a href="#per-chi">Per chi</a>
+<a href="#contatti" class="az-menu-cta">Raccontaci il tuo progetto</a>
 </nav>
 </div>
 </header>
 
 <section id="top" style="position: relative; overflow: hidden">
-<div style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 9vw, 128px) clamp(20px, 5vw, 64px) clamp(56px, 7vw, 96px); display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div class="az-hero" style="max-width: 1280px; margin: 0 auto; padding: clamp(48px, 9vw, 128px) clamp(20px, 5vw, 64px) clamp(56px, 8vw, 120px); display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
 <div style="flex: 1 1 580px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
 <p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #D1A24C">Artist Development · Creative Direction · Live Show Production</p>
 <h1 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(46px, 6.4vw, 96px); line-height: 1.0; letter-spacing: -0.01em; color: #F4EEE3">
@@ -61,17 +110,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 <a href="#metodo" class="az-ghost" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 24px; color: #EEE7DA; text-decoration: none; font-size: 15px; font-weight: 500; border: 1px solid rgba(238,231,218,0.2); border-radius: 2px">Scopri il metodo</a>
 </div>
 </div>
-<div style="flex: 1 1 360px; min-width: 0; display: flex; justify-content: center; align-items: center; padding: 24px 0; background: radial-gradient(closest-side, rgba(209,162,76,0.16), rgba(209,162,76,0) 72%)">
-<img src="assets/logo-full.webp" alt="Logo ATTO ZERO" style="width: 100%; max-width: 460px; height: auto; display: block">
-</div>
-</div>
-<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px) clamp(56px, 7vw, 96px)">
-<div style="border-top: 1px solid rgba(209,162,76,0.25); padding-top: 28px; display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: center; font-size: 14px; letter-spacing: 0.06em; color: #9C958A">
-<span style="display: inline-flex; align-items: center; gap: 12px"><span style="color: #D1A24C; font-weight: 600">I</span>Identità dell'artista</span>
-<svg aria-hidden="true" width="28" height="12" viewBox="0 0 28 12" fill="none" stroke="#6E685E" stroke-width="1.4"><path d="M0 6h26"></path><path d="M21 1l5 5-5 5"></path></svg>
-<span style="display: inline-flex; align-items: center; gap: 12px"><span style="color: #D1A24C; font-weight: 600">II</span>Costruzione dello show</span>
-<svg aria-hidden="true" width="28" height="12" viewBox="0 0 28 12" fill="none" stroke="#6E685E" stroke-width="1.4"><path d="M0 6h26"></path><path d="M21 1l5 5-5 5"></path></svg>
-<span style="display: inline-flex; align-items: center; gap: 12px"><span style="color: #D1A24C; font-weight: 600">III</span>Proposta pronta per il mercato</span>
+<div class="az-hero-visual" style="flex: 1 1 360px; min-width: 0; display: flex; justify-content: center; align-items: center; padding: 24px 0; background: radial-gradient(closest-side, rgba(209,162,76,0.16), rgba(209,162,76,0) 72%)">
+<img src="assets/logo-full.webp" onerror="this.onerror=null;this.src=\'logo-full.webp\'" alt="Logo ATTO ZERO" class="az-hero-logo" style="width: 100%; max-width: 460px; height: auto; display: block">
 </div>
 </div>
 </section>
@@ -89,9 +129,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 <p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.3; color: #D1A24C">Ma quando quelle porte si aprono, cosa trova un direttore artistico?</p>
 <p style="margin: 0; color: #CFC7B8">ATTO ZERO parte da questa domanda. Interveniamo direttamente sul progetto, sviluppando uno spettacolo con una struttura professionale, una proposta riconoscibile e un linguaggio personale.</p>
 </div>
-<div style="flex: 1 1 480px; min-width: 0; overflow-x: auto">
-<table style="width: 100%; min-width: 480px; border-collapse: collapse; font-size: 16px; line-height: 1.5">
-<caption style="text-align: left; padding-bottom: 16px; font-size: 13px; color: #9C958A; letter-spacing: 0.04em">Interveniamo prima della promozione: costruiamo ciò che sarà promosso.</caption>
+<div style="flex: 1 1 480px; min-width: 0">
+<table class="az-compare" style="width: 100%; border-collapse: collapse; font-size: 16px; line-height: 1.5">
 <thead>
 <tr>
 <th scope="col" style="text-align: left; padding: 14px 20px 14px 0; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #9C958A; border-bottom: 1px solid rgba(238,231,218,0.16); width: 42%">Approccio tradizionale</th>
@@ -100,20 +139,20 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 </thead>
 <tbody>
 <tr>
-<td style="padding: 22px 20px 22px 0; color: #9C958A; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Marketing e comunicazione</td>
-<td style="padding: 22px 0 22px 20px; color: #EEE7DA; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Prima si costruisce il progetto, poi lo si comunica</td>
+<td data-label="Tradizionale" style="padding: 22px 20px 22px 0; color: #9C958A; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Marketing e comunicazione</td>
+<td data-label="ATTO ZERO" style="padding: 22px 0 22px 20px; color: #EEE7DA; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Prima si costruisce il progetto, poi lo si comunica</td>
 </tr>
 <tr>
-<td style="padding: 22px 20px 22px 0; color: #9C958A; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Produzione di singoli brani</td>
-<td style="padding: 22px 0 22px 20px; color: #EEE7DA; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Progettazione dell'intera esperienza live</td>
+<td data-label="Tradizionale" style="padding: 22px 20px 22px 0; color: #9C958A; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Produzione di singoli brani</td>
+<td data-label="ATTO ZERO" style="padding: 22px 0 22px 20px; color: #EEE7DA; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Progettazione dell'intera esperienza live</td>
 </tr>
 <tr>
-<td style="padding: 22px 20px 22px 0; color: #9C958A; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Consulenza senza esecuzione</td>
-<td style="padding: 22px 0 22px 20px; color: #EEE7DA; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Direzione artistica con produzione e coordinamento</td>
+<td data-label="Tradizionale" style="padding: 22px 20px 22px 0; color: #9C958A; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Consulenza senza esecuzione</td>
+<td data-label="ATTO ZERO" style="padding: 22px 0 22px 20px; color: #EEE7DA; border-bottom: 1px solid rgba(238,231,218,0.08); vertical-align: top">Direzione artistica con produzione e coordinamento</td>
 </tr>
 <tr>
-<td style="padding: 22px 20px 22px 0; color: #9C958A; vertical-align: top">Booking come punto di partenza</td>
-<td style="padding: 22px 0 22px 20px; color: #EEE7DA; vertical-align: top">Show pronto e materiali commerciali prima della proposta</td>
+<td data-label="Tradizionale" style="padding: 22px 20px 22px 0; color: #9C958A; vertical-align: top">Booking come punto di partenza</td>
+<td data-label="ATTO ZERO" style="padding: 22px 0 22px 20px; color: #EEE7DA; vertical-align: top">Show pronto e materiali commerciali prima della proposta</td>
 </tr>
 </tbody>
 </table>
@@ -134,7 +173,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 24px 80px; align-items: flex-end; justify-content: space-between">
 <h2 style="margin: 0; flex: 1 1 520px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(38px, 4.4vw, 64px); line-height: 1.04; color: #F4EEE3">Costruiamo ciò che sarà promosso.</h2>
-<p style="margin: 0; flex: 1 1 360px; max-width: 460px; color: #CFC7B8">Sei aree di intervento, dall'identità al lancio. Un partner creativo e produttivo che lavora a monte della promozione.</p>
+<p style="margin: 0; flex: 1 1 360px; max-width: 460px; color: #CFC7B8">Sei aree di intervento, dall'identità al lancio, componibili in base al progetto.</p>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0; border-top: 1px solid rgba(238,231,218,0.1); border-left: 1px solid rgba(238,231,218,0.1)">
 <article style="padding: 36px 32px 40px; border-right: 1px solid rgba(238,231,218,0.1); border-bottom: 1px solid rgba(238,231,218,0.1); display: flex; flex-direction: column; gap: 16px">
@@ -174,7 +213,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #9C958A">Contesti compatibili, strategia di proposta e presentazione a operatori e promoter pertinenti, nei limiti del mandato concordato.</p>
 </article>
 </div>
-<p style="margin: 0; font-size: 14px; color: #9C958A">Le attività sono moduli componibili, non prestazioni automaticamente incluse in ogni incarico.</p>
 </div>
 </section>
 
@@ -227,49 +265,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 </div>
 </section>
 
-<section id="package">
-<div style="max-width: 1280px; margin: 0 auto; padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 64px); display: flex; flex-direction: column; gap: 56px">
-<div style="display: flex; align-items: center; gap: 20px">
-<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #D1A24C; white-space: nowrap">04 — Live Show Package</span>
-<span style="flex: 1; height: 1px; background: rgba(209,162,76,0.25)"></span>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 24px 80px; align-items: flex-end; justify-content: space-between">
-<h2 style="margin: 0; flex: 1 1 520px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(38px, 4.4vw, 64px); line-height: 1.04; color: #F4EEE3">Non ore di consulenza. Consegne concrete.</h2>
-<p style="margin: 0; flex: 1 1 360px; max-width: 460px; color: #CFC7B8">Il percorso si chiude con un insieme definito di deliverable, concordati nel preventivo: obiettivi, tappe e consegne misurabili.</p>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); column-gap: 64px">
-<div style="display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding: 28px 0; border-top: 1px solid rgba(238,231,218,0.12)">
-<span style="flex: 0 0 180px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.1em; color: #D1A24C">SHOW</span>
-<span style="flex: 1 1 240px; min-width: 0; color: #CFC7B8">Concept, repertorio, arrangiamenti e struttura della performance.</span>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding: 28px 0; border-top: 1px solid rgba(238,231,218,0.12)">
-<span style="flex: 0 0 180px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.1em; color: #D1A24C">IDENTITY</span>
-<span style="flex: 1 1 240px; min-width: 0; color: #CFC7B8">Direzione artistica e sistema visivo coerente.</span>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding: 28px 0; border-top: 1px solid rgba(238,231,218,0.12)">
-<span style="flex: 0 0 180px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.1em; color: #D1A24C">MEDIA</span>
-<span style="flex: 1 1 240px; min-width: 0; color: #CFC7B8">Foto, teaser e video di presentazione, ove commissionati.</span>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding: 28px 0; border-top: 1px solid rgba(238,231,218,0.12)">
-<span style="flex: 0 0 180px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.1em; color: #D1A24C">PRODUCTION</span>
-<span style="flex: 1 1 240px; min-width: 0; color: #CFC7B8">Organico, calendario prove e requisiti tecnici.</span>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding: 28px 0; border-top: 1px solid rgba(238,231,218,0.12); border-bottom: 1px solid rgba(238,231,218,0.12)">
-<span style="flex: 0 0 180px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.1em; color: #D1A24C">BOOKING KIT</span>
-<span style="flex: 1 1 240px; min-width: 0; color: #CFC7B8">EPK, descrizione, scheda tecnica e proposta commerciale.</span>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding: 28px 0; border-top: 1px solid rgba(238,231,218,0.12); border-bottom: 1px solid rgba(238,231,218,0.12)">
-<span style="flex: 0 0 180px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.1em; color: #D1A24C">LAUNCH</span>
-<span style="flex: 1 1 240px; min-width: 0; color: #CFC7B8">Piano di ingresso nel mercato e networking, quando contrattualizzato.</span>
-</div>
-</div>
-</div>
-</section>
-
 <section id="per-chi" style="background: #13110E; border-top: 1px solid rgba(238,231,218,0.06)">
 <div style="max-width: 1280px; margin: 0 auto; padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 64px); display: flex; flex-direction: column; gap: 56px">
 <div style="display: flex; align-items: center; gap: 20px">
-<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #D1A24C; white-space: nowrap">05 — A chi ci rivolgiamo</span>
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #D1A24C; white-space: nowrap">04 — A chi ci rivolgiamo</span>
 <span style="flex: 1; height: 1px; background: rgba(209,162,76,0.25)"></span>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 48px 80px; align-items: flex-start">
@@ -301,7 +300,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 
 <section id="manifesto" style="border-top: 1px solid rgba(238,231,218,0.06); background: radial-gradient(60% 70% at 50% 0%, rgba(209,162,76,0.10), rgba(209,162,76,0) 70%)">
 <div style="max-width: 980px; margin: 0 auto; padding: clamp(96px, 12vw, 168px) clamp(20px, 5vw, 64px); display: flex; flex-direction: column; align-items: center; gap: 40px; text-align: center">
-<img src="assets/logo-mark.webp" alt="" style="width: 88px; height: auto; display: block">
+<img src="assets/logo-mark.webp" onerror="this.onerror=null;this.src=\'logo-mark.webp\'" alt="" style="width: 88px; height: auto; display: block">
 <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: #D1A24C">Manifesto</span>
 <div style="display: flex; flex-direction: column; gap: 10px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(28px, 3.4vw, 46px); line-height: 1.2; color: #9C958A">
 <p style="margin: 0">Non partiamo dai follower.</p>
@@ -321,7 +320,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 <section id="formati" style="background: #13110E; border-top: 1px solid rgba(238,231,218,0.06)">
 <div style="max-width: 1280px; margin: 0 auto; padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 64px); display: flex; flex-direction: column; gap: 56px">
 <div style="display: flex; align-items: center; gap: 20px">
-<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #D1A24C; white-space: nowrap">06 — Come lavoriamo</span>
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #D1A24C; white-space: nowrap">05 — Come lavoriamo</span>
 <span style="flex: 1; height: 1px; background: rgba(209,162,76,0.25)"></span>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 24px 80px; align-items: flex-end; justify-content: space-between">
@@ -353,7 +352,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 <div style="display: flex; flex-wrap: wrap; gap: 20px 48px; padding-top: 32px; border-top: 1px solid rgba(238,231,218,0.1)">
 <p style="margin: 0; flex: 1 1 300px; min-width: 0; font-size: 15px; color: #9C958A"><span style="display: block; font-weight: 600; color: #EEE7DA; margin-bottom: 4px">Costi trasparenti</span>La fee di direzione e produzione è separata dai costi di musicisti, studio, video, grafica, prove, service e trasferte.</p>
 <p style="margin: 0; flex: 1 1 300px; min-width: 0; font-size: 15px; color: #9C958A"><span style="display: block; font-weight: 600; color: #EEE7DA; margin-bottom: 4px">Tutto per iscritto</span>Revisioni incluse, scadenze, diritti su arrangiamenti e master, liberatorie e attività escluse.</p>
-<p style="margin: 0; flex: 1 1 300px; min-width: 0; font-size: 15px; color: #9C958A"><span style="display: block; font-weight: 600; color: #EEE7DA; margin-bottom: 4px">Nessuna promessa facile</span>Non vendiamo visibilità a uno spettacolo che ancora non esiste. Costruiamo uno spettacolo che meriti di essere visto.</p>
 </div>
 </div>
 </section>
@@ -451,7 +449,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 </button>
 </form>
 <div id="az-sent" hidden role="status" style="min-height: 480px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; text-align: center; padding: 24px">
-<img src="assets/logo-mark.webp" alt="" style="width: 80px; height: auto; display: block">
+<img src="assets/logo-mark.webp" onerror="this.onerror=null;this.src=\'logo-mark.webp\'" alt="" style="width: 80px; height: auto; display: block">
 <h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 40px; line-height: 1.1; color: #F4EEE3">Richiesta ricevuta.</h3>
 <p style="margin: 0; max-width: 400px; color: #CFC7B8">Grazie. Valuteremo con attenzione il tuo progetto e ti ricontatteremo per fissare una discovery call.</p>
 <button type="button" id="az-reset" class="az-ghost" style="min-height: 48px; padding: 0 22px; background: transparent; color: #EEE7DA; border: 1px solid rgba(238,231,218,0.24); border-radius: 2px; font: inherit; font-size: 15px; cursor: pointer">Invia un'altra richiesta</button>
@@ -465,7 +463,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 <div style="display: flex; flex-wrap: wrap; gap: 40px 64px; justify-content: space-between; align-items: flex-start">
 <div style="display: flex; flex-direction: column; gap: 16px; flex: 1 1 280px; min-width: 0">
 <div style="display: flex; align-items: center; gap: 14px">
-<img src="assets/logo-mark.webp" alt="" style="width: 48px; height: auto; display: block">
+<img src="assets/logo-mark.webp" onerror="this.onerror=null;this.src=\'logo-mark.webp\'" alt="" style="width: 48px; height: auto; display: block">
 <span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 24px; font-weight: 600; letter-spacing: 0.22em; color: #EEE7DA">ATTO ZERO</span>
 </div>
 <p style="margin: 0; font-size: 14px; letter-spacing: 0.06em; color: #9C958A">Artistic Development &amp; Live Production</p>
@@ -499,6 +497,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #D1A24C;outline-offset:3p
 const ENDPOINT = 'https://script.google.com/macros/s/AKfycbz67VcI99CfNDP2Tp5-M3CdpyY-fDup7KkTJmnec4Ommp4-zPXGgDTJi5PEUDsFTAGa/exec';
 
 (function () {
+  const header = document.getElementById('az-header');
+  const burger = document.getElementById('az-burger');
+  function setMenu(open){ header.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu'); }
+  burger.addEventListener('click', function(){ setMenu(!header.classList.contains('open')); });
+  document.querySelectorAll('#az-menu a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setMenu(false); });
+
   const form = document.getElementById('az-form');
   const sent = document.getElementById('az-sent');
   const err = document.getElementById('az-error');
